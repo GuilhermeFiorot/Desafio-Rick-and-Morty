@@ -4,7 +4,7 @@ Está é uma API que você consegue Criar, Ler, Atualizar e Deletar dados que fo
 
 Essa API foi criada para o processo seletivo de Desenvolvedor Backend da https://sesatech.com.br/
 
-## Instalação
+### Instalação
 
 Abra o CMD e caminhe até o diretorio do codigo.
 
@@ -33,7 +33,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-## Utilização
+### Utilização
 Passos para começarmos a utilizar
 
 1 - Importar o arquivo do insominia e utilizar o enviroment 
@@ -51,7 +51,7 @@ app.py
 ```
 4 - Agora basta utilizar das rotas no insomnia
 
-## Contribuiçoes
+### Contribuiçoes
 
 Para pesquisa foram utilizados os links abaixo
 
