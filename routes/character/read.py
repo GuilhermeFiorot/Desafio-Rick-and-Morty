@@ -8,6 +8,9 @@ log = getLoggerAplication("Read Character Route")
 def readCharacter(app):
     
     @app.route("/read_character", methods=['GET'])
+    # Essa rota espera receber através de uma requisição GET e formato Query o dado:
+    # Page (int)
+    # e retorna os dados dos personagens de forma paginada (10 por pagina)
     @auth_is_necessary()
     def read_char():
         page = request.args.get("page", 1, type=int)
@@ -43,20 +46,22 @@ def readCharacter(app):
         return jsonify(message="Success", data={"info": info, "data": data}, status_code=201)
     
     @app.route("/read_character/<int:id>", methods=['GET'])
+    # Essa rota espera receber através de uma requisição GET e id (int) na url
+    # e retorna os dados do personagem de forma unica pelo id
     @auth_is_necessary()
     def read_charId(id):
-        character = db.character.find_one({"id": id})
-        if character:
+        character_exist = db.character.find_one({"id": id})
+        if character_exist:
             data = {
-                    "id": character["id"],
-                    "name": character["name"],
-                    "status": character["status"],
-                    "species": character["species"],
-                    "gender": character["gender"],
-                    "origin": character["origin"],
-                    "location": character["location"],
-                    "url": character["url"],
-                    "created": character["created"]
+                    "id": character_exist["id"],
+                    "name": character_exist["name"],
+                    "status": character_exist["status"],
+                    "species": character_exist["species"],
+                    "gender": character_exist["gender"],
+                    "origin": character_exist["origin"],
+                    "location": character_exist["location"],
+                    "url": character_exist["url"],
+                    "created": character_exist["created"]
             }
         else:
             return jsonify(message="Bad Request: id not found in db.", data=[], status_code=400)

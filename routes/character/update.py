@@ -9,6 +9,9 @@ log = getLoggerAplication("Update Character Route")
 def updateCharacter(app):
     
     @app.route("/update_character/<int:id>", methods=['PUT'])
+    # Essa rota espera receber através de uma requisição PUT, id (int) na url e formato Json pelo menos um dos dados a seguir:
+    # name, status(Alive, Dead ou Unknow), species, gender(Male, Female, Genderless ou unknow), origin(nome ou unknow) e location(nome ou unknow)
+    # e retorna os dados do personagem atualizado
     @auth_is_necessary()
     def update_char(id):
         character_exist = db.character.find_one({"id":id})

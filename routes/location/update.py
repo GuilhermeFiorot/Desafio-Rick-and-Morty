@@ -8,6 +8,9 @@ log = getLoggerAplication("Update Location Route")
 def updateLocation(app):
     
     @app.route("/update_location/<int:id>", methods=['PUT'])
+    # Essa rota espera receber através de uma requisição PUT, id (int) na url e formato Json pelo menos um dos dados a seguir:
+    # name, dimension (nome ou unknow), residents (lista vazia ou lista com nomes)
+    # e retorna os dados da location atualizada
     @auth_is_necessary()
     def update_loc(id):
         location_exist = db.location.find_one({"id":id})

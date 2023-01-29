@@ -10,6 +10,9 @@ log = getLoggerAplication("Create Location Route")
 def createLocation(app):
     
     @app.route("/create_location", methods=['POST'])
+    # Essa rota espera receber através de uma requisição POST e formato Json os dados:
+    # name, dimension (nome ou unknow), residents (lista vazia ou lista com nomes)
+    # e retorna os dados da location criada
     @auth_is_necessary()
     def create_loca():
         name = request.get_json().get("name")

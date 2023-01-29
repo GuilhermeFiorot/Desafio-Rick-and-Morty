@@ -10,6 +10,9 @@ log = getLoggerAplication("Create Character Route")
 def createCharacter(app):
     
     @app.route("/create_character", methods=["POST"])
+    # Essa rota espera receber através de uma requisição POST e formato JSON os dados:
+    # name, status(Alive, Dead ou Unknow), species, gender(Male, Female, Genderless ou unknow), origin(nome ou unknow) e location(nome ou unknow)
+    # e retorna os dados do personagem criado
     @auth_is_necessary()
     def create_char():
         name = request.get_json().get("name")

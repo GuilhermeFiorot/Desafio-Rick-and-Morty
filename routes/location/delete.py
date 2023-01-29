@@ -8,6 +8,8 @@ log = getLoggerAplication("Create Location Route")
 def deleteLocation(app):
     
     @app.route("/delete_location/<int:id>", methods=["DELETE"])
+    # Essa rota espera receber através de uma requisição DELETE e id (int) na url
+    # e retorna os dados da location delatada
     @auth_is_necessary()
     def delete_loc(id):
         # Verificando se id existe no banco

@@ -7,6 +7,9 @@ log = getLoggerAplication("Read Location Route")
 
 def readLocation(app):
     @app.route("/read_location", methods=["GET"])
+    # Essa rota espera receber através de uma requisição GET e formato Query o dado:
+    # Page (int)
+    # e retorna os dados das locations de forma paginada (10 por pagina)
     @auth_is_necessary()
     def read_loc():
         page = request.args.get("page", 1, type=int)
@@ -39,17 +42,19 @@ def readLocation(app):
         return jsonify(message="Success", data=[{"info": info, "data": data}], status_code=201)
     
     @app.route("/read_location/<int:id>", methods=['GET'])
+    # Essa rota espera receber através de uma requisição GET e id (int) na url
+    # e retorna os dados da location de forma unica pelo id
     @auth_is_necessary()
     def read_locId(id):
-        location = db.location.find_one({"id": id})
-        if location:
+        location_exist = db.location.find_one({"id": id})
+        if location_exist:
             data = {
-                    "id": location["id"],
-                    "name": location["name"],
-                    "dimension": location["dimension"],
-                    "residents": location["residents"],
-                    "url": location["url"],
-                    "created": location["created"]
+                    "id": location_exist["id"],
+                    "name": location_exist["name"],
+                    "dimension": location_exist["dimension"],
+                    "residents": location_exist["residents"],
+                    "url": location_exist["url"],
+                    "created": location_exist["created"]
             }
         else:
             return jsonify(message="Bad Request: id not found in db.", data=[], status_code=201)    

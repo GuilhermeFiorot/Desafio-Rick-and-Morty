@@ -8,6 +8,9 @@ log = getLoggerAplication("Delete Character Route")
 def deleteCharacter(app):
     
     @app.route("/delete_character/<int:id>", methods=['DELETE'])
+    # Essa rota espera receber através de uma requisição DELETE e id indentificado na url
+    # Apaga os dados do usuario e apaga usuario da lista de residents na tabela location
+    # e retorna os dados do personagem apagado
     @auth_is_necessary()
     def delete_char(id):
         # Verificando se id existe no banco
