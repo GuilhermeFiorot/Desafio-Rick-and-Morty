@@ -59,8 +59,8 @@ Location ->
 /delete
 ```
 
-```bash
 Character ->
+```bash
 /create
 /read
 /update
