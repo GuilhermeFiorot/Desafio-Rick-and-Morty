@@ -20,7 +20,6 @@ def readLocation(app):
                                             ])
         data = []
         for location in locations:
-            print(location)
             data.append({
                 	"id": location["id"],
                     "name": location["name"],
@@ -43,13 +42,15 @@ def readLocation(app):
     @auth_is_necessary()
     def read_locId(id):
         location = db.location.find_one({"id": id})
-        data = {
-                "id": location["id"],
-                "name": location["name"],
-                "dimension": location["dimension"],
-                "residents": location["residents"],
-                "url": location["url"],
-                "created": location["created"]
-        }
-        
+        if location:
+            data = {
+                    "id": location["id"],
+                    "name": location["name"],
+                    "dimension": location["dimension"],
+                    "residents": location["residents"],
+                    "url": location["url"],
+                    "created": location["created"]
+            }
+        else:
+            return jsonify(message="Bad Request: id not found in db.", data=[], status_code=201)    
         return jsonify(message="Success", data={"data": data}, status_code=201)

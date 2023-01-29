@@ -46,15 +46,18 @@ def readCharacter(app):
     @auth_is_necessary()
     def read_charId(id):
         character = db.character.find_one({"id": id})
-        data = {
-                "id": character["id"],
-                "name": character["name"],
-                "status": character["status"],
-                "species": character["species"],
-                "gender": character["gender"],
-                "origin": character["origin"],
-                "location": character["location"],
-                "url": character["url"],
-                "created": character["created"]
-        }
+        if character:
+            data = {
+                    "id": character["id"],
+                    "name": character["name"],
+                    "status": character["status"],
+                    "species": character["species"],
+                    "gender": character["gender"],
+                    "origin": character["origin"],
+                    "location": character["location"],
+                    "url": character["url"],
+                    "created": character["created"]
+            }
+        else:
+            return jsonify(message="Bad Request: id not found in db.", data=[], status_code=400)
         return jsonify(message="Success", data={"data": data}, status_code=201)

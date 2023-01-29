@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2')
+client = MongoClient('mongodb://127.0.0.1:27017/?serverSelectionTimeoutMS=2000&connectTimeoutMS=10000')
 db = client['rickandmortydb']
 character_collection = db['character']
 
