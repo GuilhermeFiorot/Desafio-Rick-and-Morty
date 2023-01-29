@@ -21,13 +21,15 @@ def createLocation(app):
         except ValueError as e:
             return jsonify(message=str(e), status_code=400)
         
-        if loca_exist(name, dimension, residents):
+        if loca_exist(name, dimension):
             return jsonify(message="Bad Request: location already exist in db.", status_code=400)
         
-        resident_exist = db.character.find({'names': {"$all": residents}})
-        resident_list = []
-        for resident in resident_exist:
-            resident_list.append(resident["url"])
+        resident_list = []            
+        if len(residents) > 0:
+            resident_exist = db.character.find({'names': {"$all": residents}})
+            for resident in resident_exist:
+                resident_list.append(resident["url"])
+        
         last_id = db.location.find({},{"id":1,"_id":0}).sort("_id", -1).limit(1)
         id = int(last_id[0].get("id"))+1
         data = {

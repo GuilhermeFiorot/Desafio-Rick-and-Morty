@@ -25,6 +25,10 @@ def updateLocation(app):
                     name_exist = db.location.find_one({"name": name})
                     if name_exist:
                         return jsonify(message='Bad Request: name already exist.', data=[],status_code=201)
+            elif key == "dimension":
+                dimension = response.get(key)
+                if dimension == "":
+                    response[key] = "unknow"
                     
         db.location.update_one(response)
         
