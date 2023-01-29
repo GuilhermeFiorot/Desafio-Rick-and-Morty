@@ -51,6 +51,22 @@ app.py
 ```
 4 - Agora basta utilizar das rotas no insomnia
 
+Location ->
+```bash
+/create
+/read
+/update
+/delete
+```
+
+```bash
+Character ->
+/create
+/read
+/update
+/delete
+```
+
 ### Contribuiçoes
 
 Para pesquisa foram utilizados os links abaixo
